@@ -9,7 +9,7 @@ before_script:
   - composer install --dev --no-interaction
 
 script: 
-  - mkdir -p build/cov  
+  - mkdir -p build/logs  
   - php vendor/bin/phpunit
   
 after_success:

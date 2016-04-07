@@ -11,6 +11,9 @@
  */
 namespace WalmartApiClient\Http;
 
+/**
+ * @SuppressWarnings(PHPMD)
+ */
 class TransportServiceTest extends \PHPUnit_Framework_TestCase
 {
 

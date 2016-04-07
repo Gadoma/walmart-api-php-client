@@ -91,7 +91,7 @@ class TransportService implements TransportServiceInterface
         $constraints['apiKey'] = $this->apiKey;
         $constraints['format'] = 'json';
 
-        if (!empty($this->apiLinkShareId) && isset($constraints['includeLinkShare']) && $constraints['includeLinkShare'] == true) {
+        if (!empty($this->apiLinkShareId) && isset($constraints['includeLinkShare']) && $constraints['includeLinkShare'] === true) {
             unset($constraints['includeLinkShare']);
             $constraints['lsPublisherId'] = $this->apiLinkShareId;
         }

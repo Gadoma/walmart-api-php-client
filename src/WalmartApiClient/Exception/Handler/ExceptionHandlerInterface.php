@@ -16,7 +16,8 @@ interface ExceptionHandlerInterface
 
     /**
      * Handle concrete exceptions method
-     * @param \Exception    $e      Exception to handle
+     * 
+     * @param \Exception    $exc      Exception to handle
      */
-    public function handle(\Exception $e);
+    public function handle(\Exception $exc);
 }

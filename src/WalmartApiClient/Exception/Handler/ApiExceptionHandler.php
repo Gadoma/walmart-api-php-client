@@ -16,16 +16,17 @@ class ApiExceptionHandler implements ExceptionHandlerInterface
 
     /**
      * Handle client error exceptions
-     * @param \GuzzleHttp\Exception\ClientException $e
+     * 
+     * @param \GuzzleHttp\Exception\ClientException $exc
      * @throws \WalmartApiClient\Exception\ApiForbiddenException
      * @throws \WalmartApiClient\Exception\ApiNotFoundException
      * @throws \WalmartApiClient\Exception\ApiRequestUriTooLongException
      * @throws \WalmartApiClient\Exception\ApiBadRequestException
      */
-    protected function handleClientException(\GuzzleHttp\Exception\ClientException $e)
+    protected function handleClientException(\GuzzleHttp\Exception\ClientException $exc)
     {
-        if ($e->hasResponse() && isset(json_decode($e->getResponse()->getBody(), true)['errors'])) {
-            $exception = array_shift(json_decode($e->getResponse()->getBody(), true)['errors']);
+        if ($exc->hasResponse() && isset(json_decode($exc->getResponse()->getBody(), true)['errors'])) {
+            $exception = array_shift(json_decode($exc->getResponse()->getBody(), true)['errors']);
 
             switch ($exception['code']) {
                 case 403 : throw new \WalmartApiClient\Exception\ApiForbiddenException($exception['message'], $exception['code']);
@@ -41,16 +42,17 @@ class ApiExceptionHandler implements ExceptionHandlerInterface
 
     /**
      * Handle server error exceptions
-     * @param \GuzzleHttp\Exception\ServerException $e
+     * 
+     * @param \GuzzleHttp\Exception\ServerException $exc
      * @throws \WalmartApiClient\Exception\ApiBadGatewayException
      * @throws \WalmartApiClient\Exception\ApiServiceUnavailableException
      * @throws \WalmartApiClient\Exception\ApiGatewayTimeoutException
      * @throws \WalmartApiClient\Exception\ApiInternalServerErrorException
      */
-    protected function handleServerException(\GuzzleHttp\Exception\ServerException $e)
+    protected function handleServerException(\GuzzleHttp\Exception\ServerException $exc)
     {
-        if ($e->hasResponse() && $e->getResponse()->getStatusCode() !== null) {
-            $code = $e->getResponse()->getStatusCode();
+        if ($exc->hasResponse() && $exc->getResponse()->getStatusCode() !== null) {
+            $code = $exc->getResponse()->getStatusCode();
 
             switch ($code) {
                 case 502 : throw new \WalmartApiClient\Exception\ApiBadGatewayException('Bad gateway', $code);
@@ -66,24 +68,24 @@ class ApiExceptionHandler implements ExceptionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function handle(\Exception $e)
+    public function handle(\Exception $exc)
     {
-        if ($e instanceof \GuzzleHttp\Exception\ConnectException) {
-            throw new \WalmartApiClient\Exception\ApiTransportErrorException($e->getMessage());
+        if ($exc instanceof \GuzzleHttp\Exception\ConnectException) {
+            throw new \WalmartApiClient\Exception\ApiTransportErrorException($exc->getMessage());
         }
 
-        if ($e instanceof \GuzzleHttp\Exception\ClientException) {
-            $this->handleClientException($e);
+        if ($exc instanceof \GuzzleHttp\Exception\ClientException) {
+            $this->handleClientException($exc);
         }
 
-        if ($e instanceof \GuzzleHttp\Exception\ServerException) {
-            $this->handleServerException($e);
+        if ($exc instanceof \GuzzleHttp\Exception\ServerException) {
+            $this->handleServerException($exc);
         }
 
-        if ($e instanceof \GuzzleHttp\Exception\RequestException) {
-            throw new \WalmartApiClient\Exception\ApiBadRequestException($e->getMessage(), 400);
+        if ($exc instanceof \GuzzleHttp\Exception\RequestException) {
+            throw new \WalmartApiClient\Exception\ApiBadRequestException($exc->getMessage(), 400);
         }
 
-        throw new \WalmartApiClient\Exception\ApiException($e->getMessage());
+        throw new \WalmartApiClient\Exception\ApiException($exc->getMessage());
     }
 }

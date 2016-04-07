@@ -11,6 +11,9 @@
  */
 namespace WalmartApiClient\Exception\Handler;
 
+/**
+ * @SuppressWarnings(PHPMD)
+ */
 class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -21,11 +24,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testConnectException()
     {
-        $e = new \GuzzleHttp\Exception\ConnectException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'));
+        $exc = new \GuzzleHttp\Exception\ConnectException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -36,11 +39,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientException()
     {
-        $e = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(400, [], ''));
+        $exc = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(400, [], ''));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -51,11 +54,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientForbiddenException()
     {
-        $e = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(403, ['Content-type' => 'application/json'], '{"errors": [{"code": 403, "message": "Account Inactive"}]}'));
+        $exc = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(403, ['Content-type' => 'application/json'], '{"errors": [{"code": 403, "message": "Account Inactive"}]}'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -66,11 +69,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientNotFoundException()
     {
-        $e = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(404, ['Content-type' => 'application/json'], '{"errors": [{"code": 404, "message": "Wrong endpoint"}]}'));
+        $exc = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(404, ['Content-type' => 'application/json'], '{"errors": [{"code": 404, "message": "Wrong endpoint"}]}'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -81,11 +84,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientRequestUriTooLongException()
     {
-        $e = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(414, ['Content-type' => 'application/json'], '{"errors": [{"code": 414, "message": "Request URI too long"}]}'));
+        $exc = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(414, ['Content-type' => 'application/json'], '{"errors": [{"code": 414, "message": "Request URI too long"}]}'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -96,11 +99,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientDomainSpecificException()
     {
-        $e = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(400, ['Content-type' => 'application/json'], '{"errors": [{"code": 4002, "message": "Invalid itemId"}]}'));
+        $exc = new \GuzzleHttp\Exception\ClientException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(400, ['Content-type' => 'application/json'], '{"errors": [{"code": 4002, "message": "Invalid itemId"}]}'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -111,11 +114,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testServerInternalErrorException()
     {
-        $e = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(500, [], ''));
+        $exc = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(500, [], ''));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -126,11 +129,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testServerBadGatewayException()
     {
-        $e = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(502, [], ''));
+        $exc = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(502, [], ''));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -141,11 +144,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testServerServiceUnavailableException()
     {
-        $e = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(503, [], ''));
+        $exc = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(503, [], ''));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -156,11 +159,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testServerGatewayTimeoutException()
     {
-        $e = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(504, [], ''));
+        $exc = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(504, [], ''));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -171,11 +174,11 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testRequestException()
     {
-        $e = new \GuzzleHttp\Exception\RequestException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'));
+        $exc = new \GuzzleHttp\Exception\RequestException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'));
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 
 
@@ -186,10 +189,10 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDefaultException()
     {
-        $e = new \Exception('exception');
+        $exc = new \Exception('exception');
 
         $handler = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
 
-        $handler->handle($e);
+        $handler->handle($exc);
     }
 }

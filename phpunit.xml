@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="Walmart API PHP Client test suite">
             <directory>./tests</directory>
+            <exclude>./tests/WalmartApiClient/Service/ServiceBaseTest.php</exclude>
         </testsuite>
     </testsuites>
     <filter>
@@ -21,6 +22,6 @@
         </whitelist>
     </filter>
     <logging>
-        <log type="coverage-php" target="build/cov/coverage.cov"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
 </phpunit>

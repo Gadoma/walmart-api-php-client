@@ -11,6 +11,9 @@
  */
 namespace WalmartApiClient\Exception;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ApiBadGatewayException extends ApiInternalServerErrorException
 {
 }

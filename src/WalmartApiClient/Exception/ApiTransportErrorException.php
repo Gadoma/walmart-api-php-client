@@ -11,6 +11,9 @@
  */
 namespace WalmartApiClient\Exception;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ApiTransportErrorException extends ApiException
 {
 }
