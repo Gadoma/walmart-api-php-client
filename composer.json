@@ -4,8 +4,8 @@
     "description": "Walmart Open API PHP client",
     "authors": [
         {
-            "name": "Gadoma",
-            "email": "gadoma@users.noreply.github.com"
+            "name": "Piotr Gadzinski",
+            "email": "dev@gadoma.com"
         }
     ],
     "require": {

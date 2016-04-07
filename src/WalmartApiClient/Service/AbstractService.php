@@ -4,7 +4,7 @@
  * Abstract base service
  *
  * @package     Walmart API PHP Client
- * @author      Gadoma <gadoma@users.noreply.github.com>
+ * @author      Piotr Gadzinski <dev@gadoma.com>
  * @copyright   Copyright (c) 2016
  * @license     MIT
  * @since       06/04/2016
@@ -60,6 +60,18 @@ abstract class AbstractService
         }
     }
 
+    /**
+     * Helper function to guard that the checked value is float
+     * 
+     * @param mixed $value Value to check
+     * @throws \InvalidArgumentException
+     */
+    protected function guardFloat($value)
+    {
+        if (!is_float($value)) {
+            throw new \InvalidArgumentException();
+        }
+    }
 
     /**
      * Helper function to guard that the checked value is a non-empty array of integers
@@ -118,8 +130,6 @@ abstract class AbstractService
      * @param string $collectionKey The key of items array in response
      * @param array $collectionParams Auxiliary collection parameters to be extracted from response
      * @return \WalmartApiClient\Entity\Collection\AbstractCollectionInterface
-     * 
-     * @SuppressWarnings(UnusedLocalVariable)
      */
     protected function getEntityCollection($uri, $constraints = [], $collectionKey = null, $collectionParams = [])
     {
@@ -135,9 +145,7 @@ abstract class AbstractService
 
         if ($collectionKey !== null) {
             foreach ($collectionParams as $key => $value) {
-                if (isset($response[$key])) {
-                    $collectionParams[$key] = $response[$key];
-                }
+                $collectionParams[$key] = isset($response[$key]) ? $response[$key] : $value;
             }
         }
 
