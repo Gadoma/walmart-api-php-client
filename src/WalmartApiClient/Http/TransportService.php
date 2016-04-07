@@ -113,8 +113,8 @@ class TransportService implements TransportServiceInterface
         try {
             $response = $this->httpService->request('GET', $url, []);
             return json_decode($response->getBody(), true);
-        } catch (\Exception $e) {
-            $this->apiExceptionHandler->handle($e);
+        } catch (\Exception $exc) {
+            $this->apiExceptionHandler->handle($exc);
         }
     }
 }

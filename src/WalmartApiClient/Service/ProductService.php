@@ -74,12 +74,16 @@ class ProductService extends AbstractService implements ProductServiceInterface
         $searchParams['totalResults'] = null;
 
         if ($category !== '') {
-            $constraints['categoryId'] = $category;
+            $constraints['categoryId']  = $category;
+            $searchParams['categoryId'] = $category;
         }
 
         if ($facets == 'on' && $facetFilter !== '') {
             $constraints['facet.filter'] = $facetFilter;
-            $constraints['facet.range']  = $facetRange;
+
+            if ($facetRange !== '') {
+                $constraints['facet.range'] = $facetRange;
+            }
         }
 
         return $this->getEntityCollection('search', $constraints, self::COLLECTION_KEY, $searchParams);

@@ -39,7 +39,7 @@ class ProductServiceTest extends ServiceBaseTest
      * @covers WalmartApiClient\Service\AbstractService::guardInt
      * @expectedException \InvalidArgumentException
      */
-    public function testGetByIdWrongArgument()
+    public function testGetByIdWrongArgumentException()
     {
         $service = $this->getServiceMocksForException('Product');
 
@@ -86,7 +86,7 @@ class ProductServiceTest extends ServiceBaseTest
      * @covers WalmartApiClient\Service\AbstractService::guardIntArray
      * @expectedException \InvalidArgumentException
      */
-    public function testGetByIdsWrongArgument()
+    public function testGetByIdsWrongArgumentException()
     {
         $service = $this->getServiceMocksForException('Product');
 
@@ -96,7 +96,22 @@ class ProductServiceTest extends ServiceBaseTest
 
     /**
      * @test
+     * @covers WalmartApiClient\Service\ProductService::getByIds
+     * @covers WalmartApiClient\Service\AbstractService::guardIntArray
+     * @expectedException \InvalidArgumentException
+     */
+    public function testGetByIdsEmptyArgumentException()
+    {
+        $service = $this->getServiceMocksForException('Product');
+
+        $service->getByIds([]);
+    }
+
+
+    /**
+     * @test
      * @covers WalmartApiClient\Service\ProductService::getBySearch
+     * @covers WalmartApiClient\Service\AbstractService::getEntityCollection
      */
     public function testGetBySearch()
     {
@@ -104,6 +119,23 @@ class ProductServiceTest extends ServiceBaseTest
         $service = $mocks['service'];
 
         $actual   = $service->getBySearch('search');
+        $expected = $mocks['collection'];
+
+
+        $this->assertTrue($actual === $expected);
+    }
+
+
+    /**
+     * @test
+     * @covers WalmartApiClient\Service\ProductService::getBySearch
+     */
+    public function testGetBySearchWithCategory()
+    {
+        $mocks   = $this->getServiceMocksForCollection('Product', 'search', ['query' => 'search', 'categoryId' => '12345', 'start' => 1, 'numItems' => 25, 'sort' => 'relevance', 'order' => 'asc', 'facets' => 'off', 'responseGroup' => 'full'], ['items' => [['itemId' => 1], ['itemId' => 2]]], 'items', ['query' => 'search', 'categoryId' => '12345', 'start' => 1, 'numItems' => 25, 'sort' => 'relevance', 'order' => 'asc', 'facets' => 'off', 'totalResults' => null]);
+        $service = $mocks['service'];
+
+        $actual   = $service->getBySearch('search', '12345');
         $expected = $mocks['collection'];
 
 
@@ -169,6 +201,7 @@ class ProductServiceTest extends ServiceBaseTest
     /**
      * @test
      * @covers WalmartApiClient\Service\ProductService::getTrending
+     * @covers WalmartApiClient\Service\AbstractService::getEntityCollection
      */
     public function testGetTrending()
     {

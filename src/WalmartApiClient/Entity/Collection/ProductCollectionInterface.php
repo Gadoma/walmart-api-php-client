@@ -22,6 +22,11 @@ interface ProductCollectionInterface
     /**
      * @return string
      */
+    public function getCategoryId();
+
+    /**
+     * @return string
+     */
     public function getSort();
 
     /**

@@ -52,4 +52,17 @@ class CollectionFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($collection->getFirst()->getItemId() === 1);
         $this->assertTrue($collection->getQuery() === 'search');
     }
+
+
+    /**
+     * @test
+     * @covers WalmartApiClient\Factory\CollectionFactory::instance
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInstanceWrongClassException()
+    {
+        $factory = new \WalmartApiClient\Factory\CollectionFactory();
+
+        $factory->instance('\\IDontExist', [], []);
+    }
 }

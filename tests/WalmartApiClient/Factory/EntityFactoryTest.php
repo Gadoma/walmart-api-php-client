@@ -30,4 +30,17 @@ class EntityFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($entity instanceof \WalmartApiClient\Entity\ProductInterface);
         $this->assertTrue($entity->getItemId() === 1);
     }
+
+
+    /**
+     * @test
+     * @covers WalmartApiClient\Factory\EntityFactory::instance
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInstanceWrongClassException()
+    {
+        $factory = new \WalmartApiClient\Factory\EntityFactory();
+
+        $factory->instance('\\IDontExist', []);
+    }
 }

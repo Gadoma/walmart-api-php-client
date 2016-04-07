@@ -23,6 +23,11 @@ class ProductCollection extends AbstractCollection implements ProductCollectionI
     protected $query;
 
     /**
+     * @var string Search category
+     */
+    protected $categoryId;
+
+    /**
      * @var string Search result sort field
      */
     protected $sort;
@@ -58,6 +63,15 @@ class ProductCollection extends AbstractCollection implements ProductCollectionI
     public function getQuery()
     {
         return $this->query;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
     }
 
 

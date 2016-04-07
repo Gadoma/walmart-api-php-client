@@ -56,6 +56,7 @@ class OfferServiceTest extends ServiceBaseTest
      * @test
      * @covers WalmartApiClient\Service\OfferService::getPreorder
      * @covers WalmartApiClient\Service\AbstractService::getEntityCollection
+     * @covers WalmartApiClient\Service\AbstractService::__construct
      */
     public function testGetPreorderEmptyResult()
     {
@@ -67,6 +68,7 @@ class OfferServiceTest extends ServiceBaseTest
         $expected = $mocks['collection'];
 
         $this->assertTrue($actual === $expected);
+        $this->assertTrue($service instanceof \WalmartApiClient\Service\AbstractService);
     }
 
 
@@ -76,7 +78,7 @@ class OfferServiceTest extends ServiceBaseTest
      * @covers WalmartApiClient\Service\AbstractService::guardString
      * @expectedException \InvalidArgumentException
      */
-    public function testGetPreorderEmptyArgument()
+    public function testGetPreorderEmptyArgumentException()
     {
         $service = $this->getServiceMocksForException('Offer');
 
@@ -90,7 +92,7 @@ class OfferServiceTest extends ServiceBaseTest
      * @covers WalmartApiClient\Service\AbstractService::guardString
      * @expectedException \InvalidArgumentException
      */
-    public function testGetPreorderWrongArgument()
+    public function testGetPreorderWrongArgumentException()
     {
         $service = $this->getServiceMocksForException('Offer');
 

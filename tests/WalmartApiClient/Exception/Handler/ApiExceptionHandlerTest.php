@@ -35,6 +35,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleClientException
      * @expectedException \WalmartApiClient\Exception\ApiBadRequestException
      */
     public function testClientException()
@@ -50,6 +51,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleClientException
      * @expectedException \WalmartApiClient\Exception\ApiForbiddenException
      */
     public function testClientForbiddenException()
@@ -65,6 +67,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleClientException
      * @expectedException \WalmartApiClient\Exception\ApiNotFoundException
      */
     public function testClientNotFoundException()
@@ -80,6 +83,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleClientException
      * @expectedException \WalmartApiClient\Exception\ApiRequestUriTooLongException
      */
     public function testClientRequestUriTooLongException()
@@ -95,6 +99,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleClientException
      * @expectedException \WalmartApiClient\Exception\ApiBadRequestException
      */
     public function testClientDomainSpecificException()
@@ -110,6 +115,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleServerException
      * @expectedException \WalmartApiClient\Exception\ApiInternalServerErrorException
      */
     public function testServerInternalErrorException()
@@ -125,6 +131,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleServerException
      * @expectedException \WalmartApiClient\Exception\ApiBadGatewayException
      */
     public function testServerBadGatewayException()
@@ -140,6 +147,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleServerException
      * @expectedException \WalmartApiClient\Exception\ApiServiceUnavailableException
      */
     public function testServerServiceUnavailableException()
@@ -155,6 +163,7 @@ class ApiExceptionHandlerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handle
+     * @covers WalmartApiClient\Exception\Handler\ApiExceptionHandler::handleServerException
      * @expectedException \WalmartApiClient\Exception\ApiGatewayTimeoutException
      */
     public function testServerGatewayTimeoutException()

@@ -37,6 +37,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \WalmartApiClient\Http\TransportService::__construct
+     * @covers \WalmartApiClient\Http\TransportService::guardNonEmpty
      * @expectedException \InvalidArgumentException
      */
     public function testCreateObjectUrlException()
@@ -53,6 +54,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \WalmartApiClient\Http\TransportService::__construct
+     * @covers \WalmartApiClient\Http\TransportService::guardNonEmpty
      * @expectedException \InvalidArgumentException
      */
     public function testCreateObjectKeyException()
@@ -69,6 +71,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \WalmartApiClient\Http\TransportService::callApi
+     * @covers \WalmartApiClient\Http\TransportService::composeUrl
      */
     public function testCallApi()
     {
@@ -94,6 +97,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \WalmartApiClient\Http\TransportService::callApi
+     * @covers \WalmartApiClient\Http\TransportService::composeUrl
      */
     public function testCallApiWithLinkShare()
     {
@@ -122,6 +126,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      * @covers \WalmartApiClient\Http\TransportService::callApi
+     * @covers \WalmartApiClient\Http\TransportService::composeUrl
      */
     public function testCallApiWithConstraints()
     {
@@ -143,5 +148,28 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $actual   = $client->callApi('uri', $constraints);
 
         $this->assertTrue($actual === $expected);
+    }
+
+
+    /**
+     * @test
+     * @covers \WalmartApiClient\Http\TransportService::callApi
+     * @covers \WalmartApiClient\Http\TransportService::composeUrl
+     */
+    public function testCallApiException()
+    {
+        $exception = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(504, [], ''));
+
+        $guzzle = \Mockery::mock('\GuzzleHttp\ClientInterface');
+        $guzzle->shouldReceive('request')->once()->withArgs(['GET', 'http://api.walmartlabs.com/v1/uri?constraint=value&apiKey=walmartapikey&format=json', []])->andThrow($exception);
+
+        $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
+        $handler->shouldReceive('handle')->once();
+
+        $apiUrl = 'http://api.walmartlabs.com/v1/';
+        $apiKey = 'walmartapikey';
+
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        $client->callApi('uri', []);
     }
 }
