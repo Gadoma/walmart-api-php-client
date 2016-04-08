@@ -74,7 +74,7 @@ interface ProductServiceInterface
      * @param int $itemId
      * @return \WalmartApiClient\Entity\Collection\ProductCollectionInterface
      */
-    public function getPostbrowseById($itemId);
+    public function getPostbrowsedById($itemId);
 
     /**
      * Get recommened product collection based on given product id

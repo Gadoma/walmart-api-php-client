@@ -14,7 +14,7 @@ namespace WalmartApiClient\Service;
 class ReviewService extends AbstractService implements ReviewServiceInterface
 {
 
-    const FACTORY_CLASS    = '\\WalmartApiClient\\Entity\\Review';
+    const ENTITY_CLASS    = '\\WalmartApiClient\\Entity\\Review';
     const COLLECTION_CLASS = '\\WalmartApiClient\\Entity\\Collection\\ReviewCollection';
     const COLLECTION_KEY   = 'reviews';
 

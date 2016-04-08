@@ -14,7 +14,7 @@ namespace WalmartApiClient\Service;
 class StoreService extends AbstractService implements StoreServiceInterface
 {
 
-    const FACTORY_CLASS    = '\\WalmartApiClient\\Entity\\Store';
+    const ENTITY_CLASS    = '\\WalmartApiClient\\Entity\\Store';
     const COLLECTION_CLASS = '\\WalmartApiClient\\Entity\\Collection\\StoreCollection';
     const COLLECTION_KEY   = null;
 

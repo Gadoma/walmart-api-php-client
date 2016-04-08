@@ -1,11 +1,14 @@
 {
     "name": "gadoma/walmart-api-php-client",
+    "type": "library",
     "license": "MIT",
     "description": "Walmart Open API PHP client",
+    "keywords": ["walmart", "API", "client"],
     "authors": [
         {
             "name": "Piotr Gadzinski",
-            "email": "dev@gadoma.com"
+            "email": "dev@gadoma.com",
+            "homepage": "https://github.com/Gadoma"
         }
     ],
     "require": {

@@ -60,6 +60,7 @@ abstract class AbstractService
         }
     }
 
+
     /**
      * Helper function to guard that the checked value is float
      * 
@@ -72,6 +73,7 @@ abstract class AbstractService
             throw new \InvalidArgumentException();
         }
     }
+
 
     /**
      * Helper function to guard that the checked value is a non-empty array of integers
@@ -118,7 +120,7 @@ abstract class AbstractService
     {
         $response = $this->transportService->callApi($uri, $constraints);
 
-        return $this->entityFactory->instance(static::FACTORY_CLASS, $response);
+        return $this->entityFactory->instance(static::ENTITY_CLASS, $response);
     }
 
 
@@ -139,8 +141,8 @@ abstract class AbstractService
 
         $rowset = ($collectionKey !== null) ? isset($response[$collectionKey]) ? $response[$collectionKey] : [] : $response;
 
-        foreach ($rowset as $product) {
-            $result[] = $this->entityFactory->instance(static::FACTORY_CLASS, $product);
+        foreach ($rowset as $entity) {
+            $result[] = $this->entityFactory->instance(static::ENTITY_CLASS, $entity);
         }
 
         if ($collectionKey !== null) {

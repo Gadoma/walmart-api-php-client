@@ -155,16 +155,18 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
      * @test
      * @covers \WalmartApiClient\Http\TransportService::callApi
      * @covers \WalmartApiClient\Http\TransportService::composeUrl
+     * @expectedException \WalmartApiClient\Exception\ApiGatewayTimeoutException
      */
     public function testCallApiException()
     {
-        $exception = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(504, [], ''));
+        $exception       = new \GuzzleHttp\Exception\ServerException('exception', new \GuzzleHttp\Psr7\Request('GET', 'someurl'), new \GuzzleHttp\Psr7\Response(504, [], ''));
+        $thrownException = new \WalmartApiClient\Exception\ApiGatewayTimeoutException();
 
         $guzzle = \Mockery::mock('\GuzzleHttp\ClientInterface');
         $guzzle->shouldReceive('request')->once()->withArgs(['GET', 'http://api.walmartlabs.com/v1/uri?constraint=value&apiKey=walmartapikey&format=json', []])->andThrow($exception);
 
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $handler->shouldReceive('handle')->once();
+        $handler->shouldReceive('handle')->once()->andThrow($thrownException);
 
         $apiUrl = 'http://api.walmartlabs.com/v1/';
         $apiKey = 'walmartapikey';

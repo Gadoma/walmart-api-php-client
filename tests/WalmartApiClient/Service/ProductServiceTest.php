@@ -166,15 +166,15 @@ class ProductServiceTest extends ServiceBaseTest
 
     /**
      * @test
-     * @covers WalmartApiClient\Service\ProductService::getPostbrowseById
+     * @covers WalmartApiClient\Service\ProductService::getPostbrowsedById
      */
-    public function testGetPostbrowseById()
+    public function testGetPostbrowsedById()
     {
         $mocks   = $this->getServiceMocksForCollection('Product', 'postbrowse', ['itemId' => 12345], [['itemId' => 1], ['itemId' => 2]], null, []);
         $service = $mocks['service'];
 
 
-        $actual   = $service->getPostbrowseById(12345);
+        $actual   = $service->getPostbrowsedById(12345);
         $expected = $mocks['collection'];
 
         $this->assertTrue($actual === $expected);

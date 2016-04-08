@@ -17,7 +17,7 @@ class ProductService extends AbstractService implements ProductServiceInterface
     const DEFAULT_PAGE_SIZE  = 25;
     const DEFAULT_SORT_FIELD = 'relevance';
     const DEFAULT_SORT_ORDER = 'asc';
-    const FACTORY_CLASS      = '\\WalmartApiClient\\Entity\\Product';
+    const ENTITY_CLASS      = '\\WalmartApiClient\\Entity\\Product';
     const COLLECTION_CLASS   = '\\WalmartApiClient\\Entity\\Collection\\ProductCollection';
     const COLLECTION_KEY     = 'items';
 
@@ -114,7 +114,7 @@ class ProductService extends AbstractService implements ProductServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function getPostbrowseById($itemId)
+    public function getPostbrowsedById($itemId)
     {
         $this->guardInt($itemId);
 
