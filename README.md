@@ -65,14 +65,13 @@ In order to use the Walmart Open API you need to obtain an API key. You can get 
 // composer autoload
 require 'vendor/autoload.php';
 
-//API details
-$apiUrl = 'http://api.walmartlabs.com/v1/';
+//API credentials
 $apiKey = 'yourWalmartApiKey';
 
 //Basic components used by the Services
 $httpClient        = new \GuzzleHttp\Client();
 $errorHandler      = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
-$transportService  = new \WalmartApiClient\Http\TransportService($httpClient, $errorHandler, $apiUrl, $apiKey);
+$transportService  = new \WalmartApiClient\Http\TransportService($httpClient, $errorHandler, $apiUrl);
 $entityFactory     = new \WalmartApiClient\Factory\EntityFactory();
 $collectionFactory = new \WalmartApiClient\Factory\CollectionFactory();
 
@@ -83,6 +82,21 @@ $reviewService   = new \WalmartApiClient\Service\ReviewService($transportService
 $taxonomyService = new \WalmartApiClient\Service\TaxonomyService($transportService, $entityFactory, $collectionFactory);
 
 ```
+
+### LinkShare Publisher Id
+
+It is possible to provide your _LinkShare Publisher Id_ for URL tracking/attribution purposes. It is optional and you can read more about this subject on [Walmart Affiliates](https://affiliates.walmart.com/) website. To use your _LinkShare Publisher Id_ with this library, just pass it to _TransportService_ constructor in the process of creating the basic components, like shown below:   
+
+```php
+$apiKey = 'yourWalmartApiKey';
+$linkSharePublisherId = 'yourId';
+
+$httpClient        = new \GuzzleHttp\Client();
+$errorHandler      = new \WalmartApiClient\Exception\Handler\ApiExceptionHandler();
+$transportService  = new \WalmartApiClient\Http\TransportService($httpClient, $errorHandler, $apiUrl, $linkSharePublisherId);
+
+```
+
 
 ## Features
 

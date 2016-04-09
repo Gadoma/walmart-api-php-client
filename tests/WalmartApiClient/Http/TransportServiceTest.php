@@ -25,10 +25,9 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     {
         $guzzle  = \Mockery::mock('\GuzzleHttp\ClientInterface');
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $apiUrl  = 'http://api.walmartlabs.com/v1/';
         $apiKey  = 'walmartapikey';
 
-        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey);
 
         $this->assertTrue($client instanceof \WalmartApiClient\Http\TransportService);
     }
@@ -47,7 +46,7 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $apiUrl  = '';
         $apiKey  = 'walmartapikey';
 
-        new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey, null, $apiUrl);
     }
 
 
@@ -61,10 +60,9 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
     {
         $guzzle  = \Mockery::mock('\GuzzleHttp\ClientInterface');
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $apiUrl  = 'http://api.walmartlabs.com/v1/';
         $apiKey  = '';
 
-        new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey);
     }
 
 
@@ -82,10 +80,9 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $guzzle->shouldReceive('request')->once()->withArgs(['GET', 'http://api.walmartlabs.com/v1/uri?apiKey=walmartapikey&format=json', []])->andReturn($response);
 
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $apiUrl  = 'http://api.walmartlabs.com/v1/';
         $apiKey  = 'walmartapikey';
 
-        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey);
 
         $expected = ['super' => 'cool'];
         $actual   = $client->callApi('uri', []);
@@ -108,13 +105,12 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $guzzle->shouldReceive('request')->once()->withArgs(['GET', 'http://api.walmartlabs.com/v1/uri?apiKey=walmartapikey&format=json&lsPublisherId=lsid', []])->andReturn($response);
 
         $handler      = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $apiUrl       = 'http://api.walmartlabs.com/v1/';
         $apiKey       = 'walmartapikey';
         $apiLinkShare = 'lsid';
 
         $constraints = ['includeLinkShare' => true];
 
-        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey, $apiLinkShare);
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey, $apiLinkShare);
 
         $expected = ['super' => 'cool'];
         $actual   = $client->callApi('uri', $constraints);
@@ -137,12 +133,11 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $guzzle->shouldReceive('request')->once()->withArgs(['GET', 'http://api.walmartlabs.com/v1/uri?constraint=value&apiKey=walmartapikey&format=json', []])->andReturn($response);
 
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
-        $apiUrl  = 'http://api.walmartlabs.com/v1/';
         $apiKey  = 'walmartapikey';
 
         $constraints = ['constraint' => 'value'];
 
-        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey);
 
         $expected = ['super' => 'cool'];
         $actual   = $client->callApi('uri', $constraints);
@@ -168,10 +163,9 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $handler = \Mockery::mock('\WalmartApiClient\Exception\Handler\ExceptionHandlerInterface');
         $handler->shouldReceive('handle')->once()->andThrow($thrownException);
 
-        $apiUrl = 'http://api.walmartlabs.com/v1/';
         $apiKey = 'walmartapikey';
 
-        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiUrl, $apiKey);
+        $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey);
         $client->callApi('uri', []);
     }
 }

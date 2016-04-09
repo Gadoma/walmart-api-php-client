@@ -48,11 +48,11 @@ class TransportService implements TransportServiceInterface
      * 
      * @param \GuzzleHttp\Client $transport HTTP http transport client
      * @param \WalmartApiClient\Exception\Handler\ExceptionHandlerInterface $handler Walmart API exceptions handler
-     * @param string $apiBaseUrl Walmart API base url 
      * @param string $apiKey Walmart API user access token
      * @param string $apiLinkShareId Walmart API LinkShare publisher id
+     * @param string $apiBaseUrl Walmart API base url 
      */
-    public function __construct(\GuzzleHttp\ClientInterface $transport, \WalmartApiClient\Exception\Handler\ExceptionHandlerInterface $handler, $apiBaseUrl, $apiKey, $apiLinkShareId = null)
+    public function __construct(\GuzzleHttp\ClientInterface $transport, \WalmartApiClient\Exception\Handler\ExceptionHandlerInterface $handler, $apiKey, $apiLinkShareId = null, $apiBaseUrl = 'http://api.walmartlabs.com/v1/')
     {
         $this->guardNonEmpty($apiBaseUrl);
         $this->guardNonEmpty($apiKey);
