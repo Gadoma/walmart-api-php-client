@@ -1,6 +1,7 @@
 # Walmart Open API PHP client
 
-[![GitHub license](https://img.shields.io/github/license/gadoma/walmart-api-php-client.svg)](https://github.com/Gadoma/walmart-api-php-client/blob/develop/LICENSE) [![Travis build status](https://img.shields.io/travis/Gadoma/walmart-api-php-client/master.svg)](https://travis-ci.org/Gadoma/walmart-api-php-client) [![Coveralls test coverage](https://img.shields.io/coveralls/gadoma/walmart-api-php-client/master.svg)](https://coveralls.io/github/Gadoma/walmart-api-php-client?branch=master) [![SensioLabsInsight grade](https://img.shields.io/sensiolabs/i/da616870-ae52-463f-9222-1d20482addbd.svg)](https://insight.sensiolabs.com/projects/da616870-ae52-463f-9222-1d20482addbd)
+[![GitHub license](https://img.shields.io/github/license/gadoma/walmart-api-php-client.svg)](https://github.com/Gadoma/walmart-api-php-client/blob/develop/LICENSE) [![Travis build status](https://img.shields.io/travis/Gadoma/walmart-api-php-client/master.svg)](https://travis-ci.org/Gadoma/walmart-api-php-client) [![Coveralls test coverage](https://img.shields.io/coveralls/Gadoma/walmart-api-php-client/master.svg)](https://coveralls.io/github/Gadoma/walmart-api-php-client?branch=master) [![SensioLabsInsight grade](https://img.shields.io/sensiolabs/i/da616870-ae52-463f-9222-1d20482addbd.svg)](https://insight.sensiolabs.com/projects/da616870-ae52-463f-9222-1d20482addbd) [![Packagist](https://img.shields.io/packagist/v/Gadoma/walmart-api-php-client.svg?maxAge=2592000)](https://packagist.org/packages/gadoma/walmart-api-php-client) [![Packagist](https://img.shields.io/packagist/dt/Gadoma/walmart-api-php-client.svg?maxAge=2592000)](https://packagist.org/packages/gadoma/walmart-api-php-client)
+
 
 
 ## Introduction
