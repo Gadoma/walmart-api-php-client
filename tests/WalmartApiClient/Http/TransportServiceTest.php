@@ -108,12 +108,10 @@ class TransportServiceTest extends \PHPUnit_Framework_TestCase
         $apiKey       = 'walmartapikey';
         $apiLinkShare = 'lsid';
 
-        $constraints = ['includeLinkShare' => true];
-
         $client = new \WalmartApiClient\Http\TransportService($guzzle, $handler, $apiKey, $apiLinkShare);
 
         $expected = ['super' => 'cool'];
-        $actual   = $client->callApi('uri', $constraints);
+        $actual   = $client->callApi('uri', []);
 
         $this->assertTrue($actual === $expected);
     }
