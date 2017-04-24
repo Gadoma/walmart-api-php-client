@@ -13,7 +13,6 @@ namespace WalmartApiClient\Service;
 
 class ProductService extends AbstractService implements ProductServiceInterface
 {
-
     const DEFAULT_PAGE_SIZE  = 25;
     const DEFAULT_SORT_FIELD = 'relevance';
     const DEFAULT_SORT_ORDER = 'asc';
@@ -78,9 +77,11 @@ class ProductService extends AbstractService implements ProductServiceInterface
             $searchParams['categoryId'] = $category;
         }
 
-        if ($facets == 'on' && $facetFilter !== '') {
-            $constraints['facet.filter'] = $facetFilter;
-
+        if ($facets == 'on') {
+            if ($facetFilter !== '') {
+                $constraints['facet.filter'] = $facetFilter;
+            }
+            
             if ($facetRange !== '') {
                 $constraints['facet.range'] = $facetRange;
             }
