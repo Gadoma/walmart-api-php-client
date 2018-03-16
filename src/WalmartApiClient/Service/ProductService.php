@@ -37,8 +37,10 @@ class ProductService extends AbstractService implements ProductServiceInterface
     public function getByUpc($upc)
     {
         $this->guardString($upc);
-
-        return $this->getEntity('items', ['upc' => $upc]);
+        
+        $collection = $this->getEntityCollection('items', ['upc' => $upc], self::COLLECTION_KEY);
+        
+        return $collection->getFirst();
     }
 
 
